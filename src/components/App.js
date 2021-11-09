@@ -10,9 +10,7 @@ import {
 } from 'react-router-dom';
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404, Login } from './';
-
-const SignUp = () => <div>SignUp</div>;
+import { Home, Navbar, Page404, Login, Signup } from './';
 
 class App extends React.Component {
   componentDidMount() {
@@ -29,7 +27,7 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<Home posts={posts} />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
           {/* <PostsList posts={posts} /> */}
