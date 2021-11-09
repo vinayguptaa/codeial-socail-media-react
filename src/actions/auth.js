@@ -7,6 +7,8 @@ import {
   SIGNUP_START,
   SIGNUP_FAILED,
   SIGNUP_SUCCESS,
+  AUTHENTICATE_USER,
+  LOG_OUT,
 } from './actionTypes';
 
 export function startLogin() {
@@ -45,6 +47,7 @@ export function login(email, password) {
         console.log('data: ', data);
         if (data.success) {
           //dispatch action to save the user
+          localStorage.setItem('token', data.data.token);
           dispatch(loginSuccess(data.data.user));
           return;
         }
@@ -98,5 +101,18 @@ export function signupSuccessful(user) {
   return {
     type: SIGNUP_SUCCESS,
     user,
+  };
+}
+
+export function authenticateUser(user) {
+  return {
+    type: AUTHENTICATE_USER,
+    user,
+  };
+}
+
+export function logoutUser() {
+  return {
+    type: LOG_OUT,
   };
 }
