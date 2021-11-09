@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../actions/auth';
+import { clearAuthState, login } from '../actions/auth';
 
 class Login extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class Login extends Component {
       email: '',
       password: '',
     };
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearAuthState());
   }
 
   handleEmailChange = (e) => {
@@ -38,7 +43,10 @@ class Login extends Component {
   };
 
   render() {
-    const { error, inProgress } = this.props.auth;
+    const { error, inProgress, isLoggedIn } = this.props.auth;
+    if (isLoggedIn) {
+      return <Navigate to="/" />;
+    }
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
