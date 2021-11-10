@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import { fetchUserProfile } from '../actions/profile';
 
 function UserProfileWrapper(props) {
   const params = useParams();
@@ -8,13 +10,21 @@ function UserProfileWrapper(props) {
 
 class UserProfile extends Component {
   componentDidMount() {
-    const {params} = this.props;
-    if(params.userId) {
+    const { params } = this.props;
+    if (params.userId) {
       //dispatch action to get user
+      this.props.dispatch(fetchUserProfile(params.userId));
     }
   }
 
   render() {
+    const { profile } = this.props;
+    const user = profile.user;
+
+    if (profile.inProgress) {
+      return <h1>Loading...</h1>;
+    }
+
     return (
       <div className="settings">
         <div className="img-container">
@@ -26,12 +36,12 @@ class UserProfile extends Component {
 
         <div className="field">
           <div className="field-label">Name</div>
-          <div className="field-value">John Doe</div>
+          <div className="field-value">{user.name}</div>
         </div>
 
         <div className="field">
           <div className="field-label">Email</div>
-          <div className="field-value">example@example.com</div>
+          <div className="field-value">{user.email}</div>
         </div>
 
         <div className="btn-grp">
@@ -42,4 +52,10 @@ class UserProfile extends Component {
   }
 }
 
-export default UserProfileWrapper;
+function mapStateToProps({ profile }) {
+  return {
+    profile,
+  };
+}
+
+export default connect(mapStateToProps)(UserProfileWrapper);
