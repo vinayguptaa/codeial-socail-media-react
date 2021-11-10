@@ -13,6 +13,7 @@ import {
 import { fetchPosts } from '../actions/posts';
 import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
+import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 const PrivateRoute = ({ children, isLoggedIn }) => {
   const location= useLocation();
@@ -23,7 +24,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
 
-    const token = localStorage.getItem('token');
+    const token = getAuthTokenFromLocalStorage();
     if (token) {
       const user = jwt_decode(token);
       console.log('user ', user);

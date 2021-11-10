@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { clearAuthState, login } from '../actions/auth';
 
-function LoginWrapper(props) {
+function LoginWrapper(props) { //using this wrapper for useLocation()
   const location = useLocation();
   return <Login {...props} location={location} />;
 }
