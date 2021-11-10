@@ -14,10 +14,9 @@ import { fetchPosts } from '../actions/posts';
 import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
 
-// const Settings = () => <div>Settings</div>;
 const PrivateRoute = ({ children, isLoggedIn }) => {
-  console.log(useLocation());
-  return isLoggedIn ? children : <Navigate to="/login" />;
+  const location= useLocation();
+  return isLoggedIn ? children : <Navigate to="/login" state={{from: location}} />;
 };
 
 class App extends React.Component {

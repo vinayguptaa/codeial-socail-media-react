@@ -31,12 +31,12 @@ class Settings extends Component {
         </div>
 
         <div className="field">
-          <div classname="field-label">Email</div>
-          <div classname="field-value">{user.email}</div>
+          <div className="field-label">Email</div>
+          <div className="field-value">{user.email}</div>
         </div>
 
         <div className="field">
-          <div classname="field-label">Name</div>
+          <div className="field-label">Name</div>
           {editMode ? (
             <input
               type="text"
@@ -44,13 +44,13 @@ class Settings extends Component {
               value={this.state.name}
             />
           ) : (
-            <div classname="field-value">{user.name}</div>
+            <div className="field-value">{user.name}</div>
           )}
         </div>
 
         {editMode && (
           <div className="field">
-            <div classname="field-label">New password</div>
+            <div className="field-label">New password</div>
 
             <input
               type="password"
@@ -62,7 +62,7 @@ class Settings extends Component {
 
         {editMode && (
           <div className="field">
-            <div classname="field-label">Confirm password</div>
+            <div className="field-label">Confirm password</div>
 
             <input
               type="password"

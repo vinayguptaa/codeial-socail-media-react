@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { clearAuthState, login } from '../actions/auth';
+
+function LoginWrapper(props) {
+  const location = useLocation();
+  return <Login {...props} location={location} />;
+}
 
 class Login extends Component {
   constructor(props) {
@@ -44,8 +49,9 @@ class Login extends Component {
 
   render() {
     const { error, inProgress, isLoggedIn } = this.props.auth;
+    let { from } = this.props.location.state || { from: { pathname: '/' } };
     if (isLoggedIn) {
-      return <Navigate to="/" />;
+      return <Navigate to={from} />;
     }
     return (
       <form className="login-form">
@@ -93,4 +99,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(LoginWrapper);
