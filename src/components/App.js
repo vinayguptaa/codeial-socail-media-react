@@ -7,13 +7,13 @@ import {
   Route,
   Routes,
   Navigate,
-} from 'react-router-dom';
+} from 'react-router-dom'; //https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404, Login, Signup } from './';
+import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
 
-const Settings = () => <div>Settings</div>;
+// const Settings = () => <div>Settings</div>;
 
 class App extends React.Component {
   componentDidMount() {
