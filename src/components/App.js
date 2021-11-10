@@ -7,6 +7,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useLocation,
 } from 'react-router-dom'; //https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md
 
 import { fetchPosts } from '../actions/posts';
@@ -14,6 +15,10 @@ import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
 
 // const Settings = () => <div>Settings</div>;
+const PrivateRoute = ({ children, isLoggedIn }) => {
+  console.log(useLocation());
+  return isLoggedIn ? children : <Navigate to="/login" />;
+};
 
 class App extends React.Component {
   componentDidMount() {
@@ -46,7 +51,11 @@ class App extends React.Component {
             <Route path="/signup" element={<Signup />} />
             <Route
               path="/settings"
-              element={auth.isLoggedIn ? <Settings /> : <Navigate to="/" />}
+              element={
+                <PrivateRoute isLoggedIn={auth.isLoggedIn}>
+                  <Settings />
+                </PrivateRoute>
+              }
             />
             <Route path="*" element={<Page404 />} />
           </Routes>
