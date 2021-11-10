@@ -11,13 +11,25 @@ import {
 } from 'react-router-dom'; //https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404, Login, Signup, Settings } from './';
+import {
+  Home,
+  Navbar,
+  Page404,
+  Login,
+  Signup,
+  Settings,
+  UserProfile,
+} from './';
 import { authenticateUser } from '../actions/auth';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 const PrivateRoute = ({ children, isLoggedIn }) => {
-  const location= useLocation();
-  return isLoggedIn ? children : <Navigate to="/login" state={{from: location}} />;
+  const location = useLocation();
+  return isLoggedIn ? (
+    children
+  ) : (
+    <Navigate to="/login" state={{ from: location }} />
+  );
 };
 
 class App extends React.Component {
@@ -54,6 +66,14 @@ class App extends React.Component {
               element={
                 <PrivateRoute isLoggedIn={auth.isLoggedIn}>
                   <Settings />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/user/:userId"
+              element={
+                <PrivateRoute isLoggedIn={auth.isLoggedIn}>
+                  <UserProfile />
                 </PrivateRoute>
               }
             />
