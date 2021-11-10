@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import Loader from 'react-loader-spinner';
 import { fetchUserProfile } from '../actions/profile';
 
 function UserProfileWrapper(props) {
@@ -21,10 +22,6 @@ class UserProfile extends Component {
     const { profile } = this.props;
     const user = profile.user;
 
-    if (profile.inProgress) {
-      return <h1>Loading...</h1>;
-    }
-
     return (
       <div className="settings">
         <div className="img-container">
@@ -34,19 +31,31 @@ class UserProfile extends Component {
           />
         </div>
 
-        <div className="field">
-          <div className="field-label">Name</div>
-          <div className="field-value">{user.name}</div>
-        </div>
+        {profile.inProgress ? (
+          <div style={{ margin: 'auto' }}>
+            <Loader
+              type="ThreeDots"
+              color="#ef7917"
+              timeout={3000} //3 secs
+            />
+          </div>
+        ) : (
+          <div>
+            <div className="field">
+              <div className="field-label">Name</div>
+              <div className="field-value">{user.name}</div>
+            </div>
 
-        <div className="field">
-          <div className="field-label">Email</div>
-          <div className="field-value">{user.email}</div>
-        </div>
+            <div className="field">
+              <div className="field-label">Email</div>
+              <div className="field-value">{user.email}</div>
+            </div>
 
-        <div className="btn-grp">
-          <button className="button save-btn">Add Friend</button>
-        </div>
+            <div className="btn-grp">
+              <button className="button save-btn">Add Friend</button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
