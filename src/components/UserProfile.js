@@ -34,7 +34,7 @@ class UserProfile extends Component {
             <Loader
               type="ThreeDots"
               color="#ef7917"
-              timeout={3000} //3 secs
+              timeout={2000} //2 secs
             />
           </div>
         ) : (

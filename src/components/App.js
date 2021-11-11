@@ -22,6 +22,7 @@ import {
 } from './';
 import { authenticateUser } from '../actions/auth';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
+import { fetchUserFriends } from '../actions/friends';
 
 const PrivateRoute = ({ children, isLoggedIn }) => {
   const location = useLocation();
@@ -47,18 +48,25 @@ class App extends React.Component {
           _id: user._id,
         })
       );
+
+      this.props.dispatch(fetchUserFriends());
     }
   }
 
   render() {
-    const { posts, auth } = this.props;
+    const { posts, auth, friends } = this.props;
     return (
       <Router>
         <div>
           <Navbar />
 
           <Routes>
-            <Route path="/" element={<Home posts={posts} />} />
+            <Route
+              path="/"
+              element={
+                <Home posts={posts} friends={friends} isLoggedIn={auth.isLoggedIn} />
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route
@@ -90,6 +98,7 @@ function mapStateToProps(state) {
   return {
     posts: state.posts,
     auth: state.auth,
+    friends: state.friends,
   };
 }
 
