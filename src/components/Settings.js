@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editUser, clearAuthState, updateError } from '../actions/auth';
+import avatar from '../assets/images/avatar.png'
 
 class Settings extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Settings extends Component {
       <div className="settings">
         <div className="img-container">
           <img
-            src="https://cdn-icons.flaticon.com/png/512/706/premium/706807.png?token=exp=1636447935~hmac=f3a998164afe30339ad2ff1615bdf0d9"
+            src={avatar}
             alt="user-dp"
           />
         </div>

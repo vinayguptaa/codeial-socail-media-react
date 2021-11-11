@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import avatar from '../assets/images/avatar.png';
 
 class PostsList extends Component {
   render() {
@@ -12,10 +13,7 @@ class PostsList extends Component {
             <div className="post-header">
               <div className="post-avatar">
                 <Link to={`user/${post.user._id}`}>
-                  <img
-                    src="https://cdn-icons.flaticon.com/png/512/706/premium/706807.png?token=exp=1636447935~hmac=f3a998164afe30339ad2ff1615bdf0d9"
-                    alt="user-pic"
-                  />
+                  <img src={avatar} alt="user-pic" />
                 </Link>
                 <div>
                   <span className="post-author">{post.user.name}</span>

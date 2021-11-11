@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import Loader from 'react-loader-spinner';
 import { fetchUserProfile } from '../actions/profile';
+import avatar from '../assets/images/avatar.png';
 
 function UserProfileWrapper(props) {
   const params = useParams();
@@ -25,10 +26,7 @@ class UserProfile extends Component {
     return (
       <div className="settings">
         <div className="img-container">
-          <img
-            src="https://cdn-icons.flaticon.com/png/512/706/premium/706807.png?token=exp=1636447935~hmac=f3a998164afe30339ad2ff1615bdf0d9"
-            alt="user-dp"
-          />
+          <img src={avatar} alt="user-dp" />
         </div>
 
         {profile.inProgress ? (

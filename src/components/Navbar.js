@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutUser } from '../actions/auth';
+import avatar from '../assets/images/avatar.png'
 
 class Navbar extends React.Component {
   logOut = () => {
@@ -32,17 +33,11 @@ class Navbar extends React.Component {
           <div className="search-results">
             <ul>
               <li className="search-results-row">
-                <img
-                  src="https://cdn-icons.flaticon.com/png/512/706/premium/706807.png?token=exp=1636447935~hmac=f3a998164afe30339ad2ff1615bdf0d9"
-                  alt="user-dp"
-                />
+                <img src={avatar} alt="user-dp" />
                 <span>John Doe</span>
               </li>
               <li className="search-results-row">
-                <img
-                  src="https://cdn-icons.flaticon.com/png/512/706/premium/706807.png?token=exp=1636447935~hmac=f3a998164afe30339ad2ff1615bdf0d9"
-                  alt="user-dp"
-                />
+                <img src={avatar} alt="user-dp" />
                 <span>John Doe</span>
               </li>
             </ul>
@@ -53,7 +48,7 @@ class Navbar extends React.Component {
             <div className="user">
               <Link to="/settings">
                 <img
-                  src="https://cdn-icons.flaticon.com/png/512/706/premium/706807.png?token=exp=1636447935~hmac=f3a998164afe30339ad2ff1615bdf0d9"
+                  src={avatar}
                   alt="user-dp"
                   id="user-dp"
                 />
