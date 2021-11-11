@@ -11,7 +11,10 @@ const FriendsList = (props) => {
 
       {props.friends &&
         props.friends.map((friend) => (
-          <FriendsListItem friend={friend.to_user} key={friend._id} />
+          <FriendsListItem
+            friend={friend.to_user}
+            key={(Math.random() + 1).toString(36).substring(7) + friend._id}
+          />
         ))}
     </div>
   );
