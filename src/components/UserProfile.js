@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router';
+import { Navigate, useParams } from 'react-router';
 import Loader from 'react-loader-spinner';
 import { fetchUserProfile } from '../actions/profile';
 import avatar from '../assets/images/avatar.png';
@@ -10,6 +10,9 @@ import { addFriend, removeFriend } from '../actions/friends';
 
 function UserProfileWrapper(props) {
   const params = useParams();
+  if (params.userId === props.auth.user._id) {
+    return <Navigate to="/settings" />;
+  }
   return <UserProfile {...props} params={params} />;
 }
 
@@ -115,7 +118,7 @@ class UserProfile extends Component {
 
   render() {
     const { profile } = this.props;
-    const { success, error, successMessage, inProgress } = this.state;
+    const { success, error, successMessage, inProgress } = this.state; //this inprogress in for add/remove friend
     const user = profile.user;
 
     const isUserAFriend = this.checkIfUserIsAFreind();
@@ -184,10 +187,11 @@ class UserProfile extends Component {
   }
 }
 
-function mapStateToProps({ profile, friends }) {
+function mapStateToProps({ profile, friends, auth }) {
   return {
     profile,
     friends,
+    auth,
   };
 }
 

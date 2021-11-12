@@ -1,6 +1,12 @@
 import { APIUrls } from '../helpers/urls';
 import { getFormBody, getAuthTokenFromLocalStorage } from '../helpers/utils';
-import { ADD_COMMENT, ADD_POST, UPDATE_POSTS } from './actionTypes';
+import {
+  ADD_COMMENT,
+  ADD_POST,
+  UPDATE_COMMENT_LIKE,
+  UPDATE_POSTS,
+  UPDATE_POST_LIKE,
+} from './actionTypes';
 
 export function fetchPosts() {
   return (dispatch) => {
@@ -76,5 +82,46 @@ export function addComment(comment, postId) {
     type: ADD_COMMENT,
     comment,
     postId,
+  };
+}
+
+export function addLike(id, likeType, userId) {
+  return (dispatch) => {
+    const url = APIUrls.toggleLike(id, likeType);
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('.........like data.........', data);
+
+        if (data.success) {
+          if (likeType === 'Post') {
+            dispatch(addPostLikeToStore(id, userId));
+          } else {
+            dispatch(addCommentikeToStore(id, userId));
+          }
+        }
+      });
+  };
+}
+
+export function addPostLikeToStore(postId, userId) {
+  return {
+    type: UPDATE_POST_LIKE,
+    postId,
+    userId,
+  };
+}
+
+export function addCommentikeToStore(commentId, userId) {
+  return {
+    type: UPDATE_COMMENT_LIKE,
+    commentId,
+    userId,
   };
 }

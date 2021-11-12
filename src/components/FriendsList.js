@@ -3,7 +3,6 @@ import Loader from 'react-loader-spinner';
 import { FriendsListItem } from './';
 
 const FriendsList = (props) => {
-  console.log(props, '.......');
   return (
     <div className="friends-list">
       <div className="header">Friends</div>
