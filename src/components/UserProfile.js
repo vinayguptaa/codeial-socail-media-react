@@ -36,7 +36,9 @@ class UserProfile extends Component {
     const userId = this.props.params.userId;
     const { friends } = this.props;
 
-    const index = friends.map((friend) => friend.to_user._id).indexOf(userId); //getting array of index and then checking !
+    const index = friends.friends
+      .map((friend) => friend.to_user._id)
+      .indexOf(userId); //getting array of index and then checking !
     if (index !== -1) {
       return true;
     }

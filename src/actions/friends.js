@@ -2,12 +2,14 @@ import { APIUrls } from '../helpers/urls';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 import {
   ADD_FRIEND,
+  FETCH_FRIENDS_START,
   FETCH_FRIENDS_SUCCESS,
   REMOVE_FRIEND,
 } from './actionTypes';
 
 export function fetchUserFriends(userId) {
   return (dispatch) => {
+    dispatch(fetchFriendsStart());
     const url = APIUrls.userFriends(userId);
     fetch(url, {
       headers: {
@@ -20,6 +22,12 @@ export function fetchUserFriends(userId) {
         console.log('data', data);
         dispatch(fetchFriendsSucces(data.data.friends));
       });
+  };
+}
+
+export function fetchFriendsStart(friends) {
+  return {
+    type: FETCH_FRIENDS_START,
   };
 }
 

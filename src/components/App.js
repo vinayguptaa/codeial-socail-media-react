@@ -64,7 +64,12 @@ class App extends React.Component {
             <Route
               path="/"
               element={
-                <Home posts={posts} friends={friends} isLoggedIn={auth.isLoggedIn} />
+                <Home
+                  posts={posts}
+                  friends={friends.friends}
+                  fetchInProgress={friends.inProgress}
+                  isLoggedIn={auth.isLoggedIn}
+                />
               }
             />
             <Route path="/login" element={<Login />} />
