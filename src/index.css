@@ -508,6 +508,7 @@ nav .nav-links ul li:hover {
   border-radius: 3px;
   color: #fff;
   font-size: 16px;
+  border: none;
 }
 #add-post-btn:focus,
 .create-post textarea:focus {
