@@ -22,7 +22,7 @@ const FriendsList = (props) => {
         </div>
       )}
       {props.friends &&
-        props.inProgess === false &&
+        props.fetchInProgress === false &&
         props.friends.length === 0 && (
           <div className="no-friends">No friends found!</div>
         )}
