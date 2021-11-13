@@ -85,9 +85,12 @@ export function addComment(comment, postId) {
   };
 }
 
-export function addLike(id, likeType, userId) {
+export function addLike(postId, likeType, userId, commentId = null) {
   return (dispatch) => {
-    const url = APIUrls.toggleLike(id, likeType);
+    const url = APIUrls.toggleLike(
+      likeType === 'Post' ? postId : commentId,
+      likeType
+    );
     fetch(url, {
       method: 'POST',
       headers: {
@@ -101,9 +104,9 @@ export function addLike(id, likeType, userId) {
 
         if (data.success) {
           if (likeType === 'Post') {
-            dispatch(addPostLikeToStore(id, userId));
+            dispatch(addPostLikeToStore(postId, userId));
           } else {
-            dispatch(addCommentikeToStore(id, userId));
+            dispatch(addCommentikeToStore(commentId, userId, postId));
           }
         }
       });
@@ -118,10 +121,11 @@ export function addPostLikeToStore(postId, userId) {
   };
 }
 
-export function addCommentikeToStore(commentId, userId) {
+export function addCommentikeToStore(commentId, userId, postId) {
   return {
     type: UPDATE_COMMENT_LIKE,
     commentId,
     userId,
+    postId,
   };
 }
