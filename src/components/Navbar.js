@@ -31,7 +31,7 @@ class Navbar extends React.Component {
         <div className="search-container">
           <img
             className="search-icon"
-            src="https://image.flaticon.com/icons/svg/483/483356.svg"
+            src="https://cdn-icons-png.flaticon.com/512/482/482631.png"
             alt="search-icon"
           />
           <input placeholder="Search" onChange={this.handleSearch} />
