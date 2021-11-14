@@ -16,7 +16,7 @@ const FriendsList = (props) => {
           <Loader
             type="ThreeDots"
             color="#ef7917"
-            timeout={3000} //2 secs
+            timeout={3000} //3 secs
           />
         </div>
       )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from 'react-loader-spinner';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutUser } from '../actions/auth';
@@ -35,6 +36,25 @@ class Navbar extends React.Component {
             alt="search-icon"
           />
           <input placeholder="Search" onChange={this.handleSearch} />
+
+          {search.searchInProgress && (
+            <div className="search-results">
+              <ul>
+                <li
+                  className="search-results-row"
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  <Loader
+                    type="ThreeDots"
+                    color="#ef7917"
+                    timeout={3000} //3 secs
+                    height={50}
+                    width={50}
+                  />
+                </li>
+              </ul>
+            </div>
+          )}
 
           {search.results.length > 0 && (
             <div className="search-results">

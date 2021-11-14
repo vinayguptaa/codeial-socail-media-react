@@ -1,6 +1,15 @@
-import { FETCH_SEARCH_RESULTS_SUCCESS } from './actionTypes';
+import {
+  FETCH_SEARCH_RESULTS_START,
+  FETCH_SEARCH_RESULTS_SUCCESS,
+} from './actionTypes';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 import { APIUrls } from '../helpers/urls';
+
+export function searchUsersStart() {
+  return {
+    type: FETCH_SEARCH_RESULTS_START,
+  };
+}
 
 export function searchResultsSuccess(users) {
   return {
@@ -11,6 +20,7 @@ export function searchResultsSuccess(users) {
 
 export function searchUsers(searchText) {
   return (dispatch) => {
+    dispatch(searchUsersStart());
     const url = APIUrls.userSearch(searchText);
 
     fetch(url, {
